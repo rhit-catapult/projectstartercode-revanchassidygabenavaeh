@@ -29,6 +29,7 @@ def main():
         pygame.draw.rect(screen, pygame.Color(0, 0, 0), (550, 250, 300, 20))
         pygame.draw.rect(screen, pygame.Color(0, 0, 0), (800, 600, 300, 20))
         pygame.draw.rect(screen, pygame.Color(0, 0, 0), (1300, 450, 300, 20))
+        pygame.draw.rect(screen, pygame.Color(0, 0, 0), (0, 775, 1500, 30))
         # TODO: Add your project code
 
         # don't forget the update, otherwise nothing will show up!
