@@ -24,9 +24,11 @@ def main():
             # TODO: Add you events code
 
         # TODO: Fill the screen with whatever background color you like!
-        screen.fill((17, 20, 132))
-        pygame.draw.rect(screen, pygame.Color(0, 0, 0), (200, 605, 300, 20))
-        pygame.draw.rect(screen, pygame.Color(0, 0, 0), (400, 900, 300, 20))
+        screen.fill((60, 60, 132))
+        pygame.draw.rect(screen, pygame.Color(0, 0, 0), (100, 505, 300, 20))
+        pygame.draw.rect(screen, pygame.Color(0, 0, 0), (550, 250, 300, 20))
+        pygame.draw.rect(screen, pygame.Color(0, 0, 0), (800, 600, 300, 20))
+        pygame.draw.rect(screen, pygame.Color(0, 0, 0), (1300, 450, 300, 20))
         # TODO: Add your project code
 
         # don't forget the update, otherwise nothing will show up!
