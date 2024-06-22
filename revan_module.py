@@ -21,6 +21,7 @@ def main():
                 sys.exit()
 
             # TODO: Add you events code
+        #stick_man =
 
         # TODO: Fill the screen with whatever background color you like!
         screen.fill((255, 255, 255))
