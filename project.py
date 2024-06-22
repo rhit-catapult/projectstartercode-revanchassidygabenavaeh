@@ -12,7 +12,7 @@ def main():
     # create a screen
     pygame.display.set_caption("Cool Project")
     # TODO: Change the size of the screen as you see fit!
-    screen = pygame.display.set_mode((1534, 805))
+    screen = pygame.display.set_mode((1434, 805))
 
     # let's set the framerate
     clock = pygame.time.Clock()
@@ -24,8 +24,9 @@ def main():
             # TODO: Add you events code
 
         # TODO: Fill the screen with whatever background color you like!
-        screen.fill((255, 255, 255))
-
+        screen.fill((17, 20, 132))
+        pygame.draw.rect(screen, pygame.Color(0, 0, 0), (200, 605, 300, 20))
+        pygame.draw.rect(screen, pygame.Color(0, 0, 0), (400, 900, 300, 20))
         # TODO: Add your project code
 
         # don't forget the update, otherwise nothing will show up!
