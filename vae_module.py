@@ -10,9 +10,9 @@ def main():
     pygame.init()
 
     # create a screen
-    pygame.display.set_caption("Cool Project")
+    pygame.display.set_caption("ERMM")
     # TODO: Change the size of the screen as you see fit!
-    screen = pygame.display.set_mode((640, 480))
+    screen = pygame.display.set_mode((1040, 680))
 
     # let's set the framerate
     clock = pygame.time.Clock()
@@ -31,5 +31,6 @@ def main():
         # don't forget the update, otherwise nothing will show up!
         pygame.display.update()
 
-if __name__ == "__main__":
+
+if __name__ == "main":
     main()

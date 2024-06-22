@@ -3,6 +3,9 @@ import sys
 import random
 import time
 
+class End_Screen:
+    def __init__(self, screen: pygame.Surface, x, y):
+        pass
 
 
 def main():
@@ -12,7 +15,7 @@ def main():
     # create a screen
     pygame.display.set_caption("Cool Project")
     # TODO: Change the size of the screen as you see fit!
-    screen = pygame.display.set_mode((640, 480))
+    screen = pygame.display.set_mode((1434, 805))
 
     # let's set the framerate
     clock = pygame.time.Clock()
@@ -24,8 +27,7 @@ def main():
             # TODO: Add you events code
 
         # TODO: Fill the screen with whatever background color you like!
-        screen.fill((255, 255, 255))
-
+        screen.fill((60, 60, 132))
         # TODO: Add your project code
 
         # don't forget the update, otherwise nothing will show up!
