@@ -48,16 +48,16 @@ def main():
         if pressed_keys[pygame.K_a]:
             stickyman_image.x -= 5
         if (frame_counter1 - frame_counter2) <= 0:
-            stickyman_image.y += 11
+            stickyman_image.y += 9
         if pressed_keys[pygame.K_w]:
             frame_counter1 += 1
             if frame_counter1 <= 20:
-                stickyman_image.y -= 12
+                stickyman_image.y -= 10
         if frame_counter1 >= 15:
             if frame_counter1 <= 20:
                 stickyman_image.y += 4
         if frame_counter1 > 20:
-            stickyman_image.y += 12
+            stickyman_image.y += 10
         if stickyman_image.y > 688:
             stickyman_image.y = 688
             frame_counter1 = 0
