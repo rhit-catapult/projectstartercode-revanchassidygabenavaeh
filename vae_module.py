@@ -2,10 +2,13 @@ import pygame
 import sys
 import random
 class Stickman():
-    def __init__ (self, screen, x, y):
+    def __init__(self, screen, x, y):
         self.screen = screen
         self.x = x
         self.y = y
+        self.velo_y = -50
+        self.ace_y = 2
+        self.speed_y = 0
 
     def draw(self):
         pygame.draw.circle(self.screen,(0,0,0), (self.x,self.y),40)
@@ -17,10 +20,17 @@ class Stickman():
         if pressed_keys[pygame.K_LEFT]:
             self.x -= 3
         if pressed_keys[pygame.K_UP]:
-            self.y -= 3
-            self.y
-        if pressed_keys[pygame.K_DOWN]:
-            self.y += 3
+            self.speed_y = self.velo_y
+            if self.y >= 688:
+                self.y = 688
+                self.speed_y = 0
+            else:
+                self.y += self.speed_y
+                self.speed_y += self.ace_y
+
+
+
+
 
 
 def main():
