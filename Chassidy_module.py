@@ -1,6 +1,5 @@
 import pygame
 import sys
-import revan_module
 
 WHITE= (225, 225,225)
 BLACK=(0,0,0)
@@ -107,7 +106,8 @@ def main():
 
 
 
-
+        frame_counter1 = 0
+        frame_counter2 = 0
         # let's set the framerate
         clock = pygame.time.Clock()
         running= True
