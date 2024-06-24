@@ -101,7 +101,7 @@ def main():
 
 
         level = Level(screen)
-        stick_man1 = Stick_Man(screen, 100, 400, 100, 100, level)
+        stick_man1 = Stick_Man(screen, 100, 400, 50, 100, level)
 
 
 
