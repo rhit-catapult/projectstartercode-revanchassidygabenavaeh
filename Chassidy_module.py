@@ -5,13 +5,13 @@ WHITE= (225, 225,225)
 BLACK=(0,0,0)
 class Mike:
     def __init__(self, screen: pygame.Surface, x, y, width, height):
-        self.screen= screen
-        self.x= x
-        self.y= y
-        self.width= width
-        self.height=height
+        self.screen = screen
+        self.x = x
+        self.y = y
+        self.width = width
+        self.height = height
         self.original_image = pygame.image.load("IMG_1733-removebg-preview.png")
-        self.image= pygame.transform.scale(self.original_image, (self.width, self.height))
+        self.image = pygame.transform.scale(self.original_image, (self.width, self.height))
         self.rect = self.image.get_rect()
         self.rect.topleft = (self.x, self.y)
 
@@ -34,6 +34,10 @@ def main():
         mike_height=100
         mike_object = Mike(screen, 100,650, mike_width, mike_height)
 
+
+        stickyman_image = Stick_Man(screen, 400, 688, "")
+        frame_counter1 = 0
+        frame_counter2 = 0
         # let's set the framerate
         clock = pygame.time.Clock()
 
@@ -41,22 +45,22 @@ def main():
         while running:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
+                    pygame.quit()
                     sys.exit()
 
-                # TODO: Add you events code
 
-            # TODO: Fill the screen with whatever background color you like!
-            screen.fill((60, 60, 132))
 
-            pygame.draw.rect(screen, BLACK, (100, 505, 300, 20))
-            pygame.draw.rect(screen,  BLACK, (550, 250, 300, 20))
-            pygame.draw.rect(screen,  BLACK, (800, 600, 300, 20))
-            pygame.draw.rect(screen,  BLACK, (1300, 450, 300, 20))
-            pygame.draw.rect(screen, BLACK, (0, 775, 1500, 30))
+            screen.fill((0,0,0))
+
+            pygame.draw.rect(screen, WHITE, (100, 505, 300, 20))
+            pygame.draw.rect(screen,  WHITE, (550, 250, 300, 20))
+            pygame.draw.rect(screen,  WHITE, (800, 600, 300, 20))
+            pygame.draw.rect(screen,  WHITE, (1300, 450, 300, 20))
+            pygame.draw.rect(screen, WHITE, (0, 775, 1500, 30))
 
             mike_object.draw()
 
-            # don't forget the update, otherwise nothing will show up!
+                # don't forget the update, otherwise nothing will show up!
             pygame.display.update()
 
             clock.tick(60)
