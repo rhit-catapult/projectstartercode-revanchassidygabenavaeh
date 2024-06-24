@@ -58,9 +58,9 @@ class Stick_Man:
         pressed_keys = pygame.key.get_pressed()
 
         if self.x > 1350:
-            self.x = 1350
-        if self.x < 0:
             self.x = 0
+        if self.x < 0:
+            self.x = 1350
 
         if pressed_keys[key_right]:
             self.x += 5
