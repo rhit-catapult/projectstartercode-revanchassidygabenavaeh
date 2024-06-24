@@ -51,24 +51,25 @@ class Stick_Man:
     def draw(self):
         self.screen.blit(self.image, (self.x, self.y, self.width, self.height))
 
-    def move(self):
+    def move(self, key_right, key_left, key_up):
         pressed_keys = pygame.key.get_pressed()
 
         if self.x > 1350:
             self.x = 1350
         if self.x < 0:
             self.x = 0
-        if pressed_keys[pygame.K_d]:
+
+        if pressed_keys[key_right]:
             self.x += 5
             if self.level.collision_check((self.x, self.y, self.width, self.height)):
                 self.x -= 5
 
-        if pressed_keys[pygame.K_a]:
+        if pressed_keys[key_left]:
             self.x -= 5
             if self.level.collision_check((self.x, self.y, self.width, self.height)):
                 self.x += 5
 
-        if pressed_keys[pygame.K_w] and self.touching_ground and not self.jump_debounce:
+        if pressed_keys[key_up] and self.touching_ground and not self.jump_debounce:
             self.speed_y = self.init_velocity
             self.touching_ground = False
             self.jump_debounce = True
@@ -102,7 +103,7 @@ def main():
 
         level = Level(screen)
         stick_man1 = Stick_Man(screen, 100, 400, 50, 100, level)
-
+        stick_man2 = Stick_Man(screen, 300, 200, 50, 100, level)
 
 
 
@@ -126,11 +127,14 @@ def main():
 
 
             stick_man1.dophysics()
+            stick_man2.dophysics()
 
 
 
-            stick_man1.move()
+            stick_man1.move(pygame.K_d, pygame.K_a, pygame.K_w)
             stick_man1.draw()
+            stick_man2.move(pygame.K_RIGHT, pygame.K_LEFT, pygame.K_UP)
+            stick_man2.draw()
 
 
 
