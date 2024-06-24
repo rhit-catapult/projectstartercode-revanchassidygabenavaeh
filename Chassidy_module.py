@@ -14,7 +14,7 @@ class Level:
         self.platform_pos.append((0, 775, 1500, 30))
     def draw(self):
         for platform in self.platform_pos:
-            pygame.draw.rect(self.screen, WHITE, platform)
+            pygame.draw.rect(self.screen, BLACK, platform)
     def collision_check(self, rect):
         rect=pygame.Rect(rect)
         for platform in self.platform_pos:
@@ -51,8 +51,8 @@ class Stick_Man:
     def move(self):
         pressed_keys = pygame.key.get_pressed()
 
-        if self.x > 1134:
-            self.x = 1134
+        if self.x > 1350:
+            self.x = 1350
         if self.x < 0:
             self.x = 0
         if pressed_keys[pygame.K_d]:
@@ -92,7 +92,7 @@ def main():
                     sys.exit()
 
 
-            screen.fill((0,0,0))
+            screen.fill((200,200,200))
 
 
 
