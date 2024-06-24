@@ -8,10 +8,13 @@ class Stick_Man:
         self.screen = screen
         self.x = x
         self.y = y
+        self.width = 100
+        self.height = 100
         self.speed_x = 5
         self.speed_y = 0
-        self.init_velocity = -10
-        self.image = pygame.image.load(image_filename)
+        self.init_velocity = -20
+        self.original_image = pygame.image.load(image_filename)
+        self.image = pygame.transform.scale(self.original_image, (self.width, self.height))
         self.acceleration_y = 2
 
     def draw(self):
@@ -26,9 +29,10 @@ def main():
     pygame.display.set_caption("Cool Project")
     # TODO: Change the size of the screen as you see fit!
     screen = pygame.display.set_mode((1434, 805))
-    stick_man1 = Stick_Man(screen, 400, 688, "another_cloud.png")
+    stick_man1 = Stick_Man(screen, 100, 650, "Standing(Middle).png")
     # let's set the framerate
     clock = pygame.time.Clock()
+    platforms=[]
     while True:
         clock.tick(60)
         for event in pygame.event.get():
@@ -56,7 +60,7 @@ def main():
             stick_man1.y += stick_man1.speed_y
             stick_man1.speed_y += stick_man1.acceleration_y
         # TODO: Fill the screen with whatever background color you like!
-        screen.fill((255, 255, 255))
+        screen.fill((0, 0, 0))
 
         # TODO: Add your project code
 
