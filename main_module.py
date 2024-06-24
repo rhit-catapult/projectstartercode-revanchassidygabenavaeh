@@ -28,7 +28,7 @@ class Level:
 
 
 class Stick_Man:
-    def __init__(self, screen: pygame.Surface, x, y, width, height, level):
+    def __init__(self, screen: pygame.Surface, x, y, width, height, level, picture):
         self.screen = screen
         self.x = x
         self.y = y
@@ -37,7 +37,8 @@ class Stick_Man:
         self.speed_x = 5
         self.speed_y = 0
         self.init_velocity = -35
-        self.original_image = pygame.image.load("unnamed (1) (1).png")
+        self.picture = picture
+        self.original_image = pygame.image.load(picture)
         self.image = pygame.transform.scale(self.original_image, (self.width, self.height))
         self.rect = self.image.get_rect()
         self.rect.topleft = (self.x, self.y)
@@ -100,10 +101,11 @@ def main():
         screen = pygame.display.set_mode((screen_width, screen_height))
         pygame.display.set_caption("Cool Project")
 
-
+        picture = "unnamed (1).png"
+        picture2 = "unnamed (1) (1).png"
         level = Level(screen)
-        stick_man1 = Stick_Man(screen, 100, 400, 50, 100, level)
-        stick_man2 = Stick_Man(screen, 300, 200, 50, 100, level)
+        stick_man1 = Stick_Man(screen, 100, 400, 50, 100, level, picture)
+        stick_man2 = Stick_Man(screen, 300, 200, 50, 100, level, picture2)
 
 
 
