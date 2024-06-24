@@ -74,7 +74,7 @@ class Stick_Man:
             self.speed_y = self.init_velocity
             self.touching_ground = False
             self.jump_debounce = True
-        if not pressed_keys[pygame.K_w]:
+        if not pressed_keys[key_up]:
             self.jump_debounce = False
     def dophysics(self):
         self.speed_y += self.acceleration_y
