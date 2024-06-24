@@ -14,7 +14,7 @@ class Level:
         self.platform_pos.append((0, 775, 1500, 30))
     def draw(self):
         for platform in self.platform_pos:
-            pygame.draw.rect(self.screen, WHITE, platform)
+            pygame.draw.rect(self.screen, BLACK, platform)
     def collision_check(self, rect):
         rect=pygame.Rect(rect)
         for platform in self.platform_pos:
@@ -36,7 +36,7 @@ class Stick_Man:
         self.height = height
         self.speed_x = 5
         self.speed_y = 0
-        self.init_velocity = -40
+        self.init_velocity = -35
         self.original_image = pygame.image.load("Standing(Middle).png")
         self.image = pygame.transform.scale(self.original_image, (self.width, self.height))
         self.rect = self.image.get_rect()
@@ -47,6 +47,21 @@ class Stick_Man:
 
     def draw(self):
         self.screen.blit(self.image, (self.x, self.y, self.width, self.height))
+
+    def move(self):
+        pressed_keys = pygame.key.get_pressed()
+
+        if self.x > 1350:
+            self.x = 1350
+        if self.x < 0:
+            self.x = 0
+        if pressed_keys[pygame.K_d]:
+            self.x += 5
+        if pressed_keys[pygame.K_a]:
+            self.x -= 5
+        if pressed_keys[pygame.K_w] and self.touching_ground:
+            self.speed_y = self.init_velocity
+            self.touching_ground = False
 
 def main():
       # turn on pygame
@@ -60,7 +75,7 @@ def main():
         pygame.display.set_caption("Cool Project")
 
 
-        stick_man1 = Stick_Man(screen, 100, 400, 100, 100)
+        stick_man1 = Stick_Man(screen, 100, 605, 100, 100)
         level=Level(screen)
 
 
@@ -77,21 +92,9 @@ def main():
                     sys.exit()
 
 
-            screen.fill((0,0,0))
+            screen.fill((200,200,200))
 
-            pressed_keys = pygame.key.get_pressed()
 
-            if stick_man1.x > 1134:
-                stick_man1.x = 1134
-            if stick_man1.x < 0:
-                stick_man1.x = 0
-            if pressed_keys[pygame.K_d]:
-                stick_man1.x += 5
-            if pressed_keys[pygame.K_a]:
-                stick_man1.x -= 5
-            if pressed_keys[pygame.K_w] and stick_man1.touching_ground:
-                stick_man1.speed_y = stick_man1.init_velocity
-                stick_man1.touching_ground = False
 
             level.draw()
 
@@ -106,7 +109,7 @@ def main():
 
 
 
-
+            stick_man1.move()
             stick_man1.draw()
 
                 # don't forget the update, otherwise nothing will show up!
