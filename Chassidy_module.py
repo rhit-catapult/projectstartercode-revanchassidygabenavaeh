@@ -75,7 +75,7 @@ def main():
         pygame.display.set_caption("Cool Project")
 
 
-        stick_man1 = Stick_Man(screen, 100, 400, 100, 100)
+        stick_man1 = Stick_Man(screen, 100, 605, 100, 100)
         level=Level(screen)
 
 
