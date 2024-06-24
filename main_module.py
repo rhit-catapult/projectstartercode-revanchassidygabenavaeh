@@ -28,7 +28,7 @@ class Level:
 
 
 class Stick_Man:
-    def __init__(self, screen: pygame.Surface, x, y, width, height):
+    def __init__(self, screen: pygame.Surface, x, y, width, height, level):
         self.screen = screen
         self.x = x
         self.y = y
@@ -43,6 +43,9 @@ class Stick_Man:
         self.rect.topleft = (self.x, self.y)
         self.acceleration_y = 2
         self.touching_ground = False
+        self.jump_debounce = False
+        self.level = level
+
 
 
     def draw(self):
@@ -57,11 +60,33 @@ class Stick_Man:
             self.x = 0
         if pressed_keys[pygame.K_d]:
             self.x += 5
+            if self.level.collision_check((self.x, self.y, self.width, self.height)):
+                self.x -= 5
+
         if pressed_keys[pygame.K_a]:
             self.x -= 5
-        if pressed_keys[pygame.K_w] and self.touching_ground:
+            if self.level.collision_check((self.x, self.y, self.width, self.height)):
+                self.x += 5
+
+        if pressed_keys[pygame.K_w] and self.touching_ground and not self.jump_debounce:
             self.speed_y = self.init_velocity
             self.touching_ground = False
+            self.jump_debounce = True
+        if not pressed_keys[pygame.K_w]:
+            self.jump_debounce = False
+    def dophysics(self):
+        self.speed_y += self.acceleration_y
+        self.y += self.speed_y
+
+        if self.level.collision_check((self.x, self.y, self.width, self.height)):
+            self.y -= self.speed_y
+
+            self.speed_y = 0
+            self.touching_ground = True
+        else:
+            self.touching_ground = False
+
+
 
 def main():
       # turn on pygame
@@ -75,8 +100,9 @@ def main():
         pygame.display.set_caption("Cool Project")
 
 
-        stick_man1 = Stick_Man(screen, 100, 605, 50, 100)
-        level=Level(screen)
+        level = Level(screen)
+        stick_man1 = Stick_Man(screen, 100, 400, 100, 100, level)
+
 
 
 
@@ -99,18 +125,14 @@ def main():
             level.draw()
 
 
-            stick_man1.speed_y += stick_man1.acceleration_y
-            stick_man1.y += stick_man1.speed_y
-
-            if level.collision_check((stick_man1.x, stick_man1.y,stick_man1.width, stick_man1.height)):
-                stick_man1.y -= stick_man1.speed_y
-                stick_man1.speed_y=0
-                stick_man1.touching_ground = True
+            stick_man1.dophysics()
 
 
 
             stick_man1.move()
             stick_man1.draw()
+
+
 
                 # don't forget the update, otherwise nothing will show up!
             pygame.display.update()
