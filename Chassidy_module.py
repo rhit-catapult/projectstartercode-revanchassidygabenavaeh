@@ -48,6 +48,21 @@ class Stick_Man:
     def draw(self):
         self.screen.blit(self.image, (self.x, self.y, self.width, self.height))
 
+    def move(self):
+        pressed_keys = pygame.key.get_pressed()
+
+        if self.x > 1134:
+            self.x = 1134
+        if self.x < 0:
+            self.x = 0
+        if pressed_keys[pygame.K_d]:
+            self.x += 5
+        if pressed_keys[pygame.K_a]:
+            self.x -= 5
+        if pressed_keys[pygame.K_w] and self.touching_ground:
+            self.speed_y = self.init_velocity
+            self.touching_ground = False
+
 def main():
       # turn on pygame
         pygame.init()
@@ -79,19 +94,7 @@ def main():
 
             screen.fill((0,0,0))
 
-            pressed_keys = pygame.key.get_pressed()
 
-            if stick_man1.x > 1134:
-                stick_man1.x = 1134
-            if stick_man1.x < 0:
-                stick_man1.x = 0
-            if pressed_keys[pygame.K_d]:
-                stick_man1.x += 5
-            if pressed_keys[pygame.K_a]:
-                stick_man1.x -= 5
-            if pressed_keys[pygame.K_w] and stick_man1.touching_ground:
-                stick_man1.speed_y = stick_man1.init_velocity
-                stick_man1.touching_ground = False
 
             level.draw()
 
@@ -106,7 +109,7 @@ def main():
 
 
 
-
+            stick_man1.move()
             stick_man1.draw()
 
                 # don't forget the update, otherwise nothing will show up!
