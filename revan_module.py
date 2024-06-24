@@ -20,9 +20,15 @@ def main():
     # create a screen
     pygame.display.set_caption("Cool Project")
     # TODO: Change the size of the screen as you see fit!
-    screen = pygame.display.set_mode((1434,805))
+    screen = pygame.display.set_mode((1434, 805))
 
     stick_man = StickMan(screen, 200, 150, "Mike.png", )
+
+    player_img = pygame.image.load("Mike.png")
+    player_rect = player_img.get_rect()
+    player_rect.center = (1000 // 2, 805 // 2)
+
+    pygame.surface.Surface(1434, 805)
 
     # let's set the framerate
     clock = pygame.time.Clock()
@@ -41,15 +47,15 @@ def main():
 
 
 
-        # pressed_keys = pygame.key.get_pressed()
-        # if pressed_keys[pygame.K_RIGHT]:
-        #     stick_man.x = stick_man.x + 10
-        # if pressed_keys[pygame.K_LEFT]:
-        #     stick_man.x = stick_man.x - 10
-        # if pressed_keys[pygame.K_UP]:
-        #     stick_man.y = stick_man.y - 5
-        # if pressed_keys[pygame.K_DOWN]:
-        #     stick_man.y = stick_man.y + 5
+    pressed_keys = pygame.key.get_pressed()
+    if pressed_keys[pygame.K_RIGHT]:
+             stick_man.x = stick_man.x + 10
+    if pressed_keys[pygame.K_LEFT]:
+             stick_man.x = stick_man.x - 10
+    if pressed_keys[pygame.K_UP]:
+             stick_man.y = stick_man.y - 5
+         if pressed_keys[pygame.K_DOWN]:
+             stick_man.y = stick_man.y + 5
 
 
 
