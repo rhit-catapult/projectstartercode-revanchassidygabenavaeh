@@ -53,6 +53,7 @@ class Stick_Man:
         self.screen.blit(self.image, (self.x, self.y, self.width, self.height))
 
     def move(self, key_right, key_left, key_up):
+        jump_sound = pygame.mixer.Sound("roblox-gravity-coil-sound-effect-made-with-Voicemod.mp3")
         pressed_keys = pygame.key.get_pressed()
 
         if self.x > 1350:
@@ -71,6 +72,7 @@ class Stick_Man:
                 self.x += 5
 
         if pressed_keys[key_up] and self.touching_ground and not self.jump_debounce:
+            jump_sound.play()
             self.speed_y = self.init_velocity
             self.touching_ground = False
             self.jump_debounce = True
