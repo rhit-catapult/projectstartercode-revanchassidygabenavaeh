@@ -1,5 +1,6 @@
 import pygame
 import sys
+import random
 
 WHITE= (225, 225,225)
 BLACK=(0,0,0)
@@ -72,7 +73,9 @@ class Stick_Man:
                 self.x += 5
 
         if pressed_keys[key_up] and self.touching_ground and not self.jump_debounce:
-            jump_sound.play()
+            jump_noise = random.randint(1, 20)
+            if jump_noise == 3:
+                jump_sound.play()
             self.speed_y = self.init_velocity
             self.touching_ground = False
             self.jump_debounce = True
@@ -89,6 +92,7 @@ class Stick_Man:
             self.touching_ground = True
         else:
             self.touching_ground = False
+            
 
 
 
