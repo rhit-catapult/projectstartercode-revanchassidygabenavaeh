@@ -37,7 +37,7 @@ class Stick_Man:
         self.speed_x = 5
         self.speed_y = 0
         self.init_velocity = -35
-        self.original_image = pygame.image.load("Standing(Middle).png")
+        self.original_image = pygame.image.load("unnamed (1) (1).png")
         self.image = pygame.transform.scale(self.original_image, (self.width, self.height))
         self.rect = self.image.get_rect()
         self.rect.topleft = (self.x, self.y)
@@ -75,7 +75,7 @@ def main():
         pygame.display.set_caption("Cool Project")
 
 
-        stick_man1 = Stick_Man(screen, 100, 605, 100, 100)
+        stick_man1 = Stick_Man(screen, 100, 605, 50, 100)
         level=Level(screen)
 
 
