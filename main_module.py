@@ -108,7 +108,8 @@ def main():
         stick_man2 = Stick_Man(screen, 300, 200, 50, 100, level, picture2)
 
 
-
+        pygame.mixer.music.load("easy-arcade-hartzmann-main-version-28392-02-32.mp3")
+        pygame.mixer.music.play(-1)
         frame_counter1 = 0
         frame_counter2 = 0
         # let's set the framerate
