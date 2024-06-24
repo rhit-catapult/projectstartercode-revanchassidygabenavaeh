@@ -36,7 +36,7 @@ class Stick_Man:
         self.height = height
         self.speed_x = 5
         self.speed_y = 0
-        self.init_velocity = -40
+        self.init_velocity = -35
         self.original_image = pygame.image.load("Standing(Middle).png")
         self.image = pygame.transform.scale(self.original_image, (self.width, self.height))
         self.rect = self.image.get_rect()
