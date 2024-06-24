@@ -73,7 +73,7 @@ class Stick_Man:
                 self.x += 5
 
         if pressed_keys[key_up] and self.touching_ground and not self.jump_debounce:
-            jump_noise = random.randint(1, 20)
+            jump_noise = random.randint(1, 30)
             if jump_noise == 3:
                 jump_sound.play()
             self.speed_y = self.init_velocity
