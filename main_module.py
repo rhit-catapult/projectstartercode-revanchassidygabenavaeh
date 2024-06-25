@@ -3,6 +3,7 @@ import sys
 import random
 import scoreboard_module
 import countdown_module
+# 27
 
 WHITE= (225, 225,225)
 BLACK=(0,0,0)
