@@ -1,5 +1,6 @@
 import pygame
 import sys
+import scoreboard_module
 
 WHITE= (225, 225,225)
 BLACK=(0,0,0)
@@ -45,6 +46,7 @@ class Stick_Man:
         self.touching_ground = False
 
 
+
     def draw(self):
         self.screen.blit(self.image, (self.x, self.y, self.width, self.height))
 
@@ -80,6 +82,9 @@ def main():
 
 
 
+
+
+
         frame_counter1 = 0
         frame_counter2 = 0
         # let's set the framerate
@@ -111,6 +116,8 @@ def main():
 
             stick_man2.move()
             stick_man2.draw()
+            redscore.draw()
+            bluescore.draw()
 
                 # don't forget the update, otherwise nothing will show up!
             pygame.display.update()
@@ -118,5 +125,5 @@ def main():
             clock.tick(60)
 
 
-if __name__ == "__main__":
-    main()
+
+main()

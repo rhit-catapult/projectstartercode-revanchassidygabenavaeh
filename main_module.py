@@ -1,6 +1,7 @@
 import pygame
 import sys
 import random
+import scoreboard_module
 
 WHITE= (225, 225,225)
 BLACK=(0,0,0)
@@ -72,7 +73,7 @@ class Stick_Man:
 
     def draw(self):
         if self.is_it:
-            pygame.draw.rect(self.screen, (0,0,0), (self.x, self.y, 100, 100))
+            pygame.draw.rect(self.screen, (0,0,0), (self.x, self.y, 50, 100))
         self.screen.blit(self.image, (self.x, self.y, self.width, self.height))
 
     def move(self, key_right, key_left, key_up, key_tag):
@@ -107,7 +108,7 @@ class Stick_Man:
 
 
         if pressed_keys[key_up] and self.touching_ground and not self.jump_debounce:
-            jump_noise = random.randint(1, 30)
+            jump_noise = random.randint(1, 10)
             if jump_noise == 3:
                 jump_sound.play()
             self.speed_y = self.init_velocity
@@ -148,6 +149,9 @@ def main():
         stick_man2 = Stick_Man(screen, 300, 200, 50, 100, level, picture2, 'hit(blue).png')
 
 
+        redscore = scoreboard_module.Scoreboard(screen, 10, pygame.Color("red"))
+        bluescore = scoreboard_module.Scoreboard(screen, 1000, pygame.Color("blue"))
+
         pygame.mixer.music.load("easy-arcade-hartzmann-main-version-28392-02-32.mp3")
         pygame.mixer.music.play(-1)
         frame_counter1 = 0
@@ -178,6 +182,8 @@ def main():
             stick_man1.draw()
             stick_man2.move(pygame.K_RIGHT, pygame.K_LEFT, pygame.K_UP, pygame.K_SPACE)
             stick_man2.draw()
+            redscore.draw()
+            bluescore.draw()
 
 
 
