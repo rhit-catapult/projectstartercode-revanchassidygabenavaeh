@@ -1,6 +1,6 @@
 import pygame
 import sys
-import random
+import time
 
 WHITE = (225, 225, 225)
 BLACK = (0, 0, 0)
@@ -13,10 +13,23 @@ class Scoreboard:
         self.score = 0
         self.color = color
         self.font = pygame.font.SysFont("candara",20, True)
+        self.is_timer_running = False
+        self.start_time = 0
 
     def draw(self):
-        caption = self.font.render(f"It timer: {self.score}", True, self.color)
+        display_time = self.score
+        if self.is_timer_running:
+            display_time += time.time() - self.start_time
+        caption = self.font.render("It timer: {:.2f}".format(display_time), True, self.color)
         self.screen.blit(caption,(self.x , self.y))
+
+    def start(self):
+        self.is_timer_running = True
+        self.start_time = time.time()
+
+    def stop(self):
+        self.is_timer_running = False
+        self.score += time.time() - self.start_time
 
 def main():
     # turn on pygame
@@ -39,11 +52,21 @@ def main():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
+            if event.type == pygame.KEYDOWN:
+                pressed_keys = pygame.key.get_pressed()
+                if pressed_keys[pygame.K_u]:
+                    redscore.start()
+                if pressed_keys[pygame.K_h]:
+                    redscore.stop()
+                if pressed_keys[pygame.K_j]:
+                    bluescore.start()
+                if pressed_keys[pygame.K_k]:
+                    bluescore.stop()
+
 
         screen.fill((200, 200, 200))
         redscore.draw()
         bluescore.draw()
-        redscore.score+=1
 
 
         # don't forget the update, otherwise nothing will show up!
