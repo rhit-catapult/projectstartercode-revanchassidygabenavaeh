@@ -55,7 +55,8 @@ class Stick_Man:
         self.picture = picture
         self.original_image = pygame.image.load(picture)
         self.image = pygame.transform.scale(self.original_image, (self.width, self.height))
-        self.image2 = pygame.image.load("corndog.jpg")
+        self.image2 = pygame.image.load("Screenshot 2024-06-25 171539 (1).png")
+        self.image2 = pygame.transform.scale(self.image2, (200,200))
         self.rect = self.image.get_rect()
         self.rect.topleft = (self.x, self.y)
         self.acceleration_y = 2
@@ -67,10 +68,10 @@ class Stick_Man:
         self.it_speed = 15
         self.sticky_man2 = pygame.image.load(sticky_man2)
         self.sticky_man2 = pygame.transform.scale(self.sticky_man2, (self.width, self.height))
-        self.direction=1
+        self.direction=-1
 
     def is_touching(self,other_stickman):
-        my_rect = pygame.Rect(self.x, self.y, self.width,self.height)
+        my_rect = pygame.Rect(self.x, self.y, self.width, self.height)
         other_rect=pygame.Rect(other_stickman.x, other_stickman.y, other_stickman.width,other_stickman.height)
         return my_rect.colliderect(other_rect)
 
@@ -78,8 +79,8 @@ class Stick_Man:
 
     def draw(self):
         if self.is_it:
-            self.screen.blit(self.image2, (self.x,self.y))
-        self.screen.blit(self.image, (self.x, self.y, self.width, self.height))
+            self.screen.blit(self.image2, (self.x-60,self.y-50))
+        self.screen.blit(self.image, (self.x, self.y,200, 200))
 
     def move(self, key_right, key_left, key_up, key_tag):
         jump_sound = pygame.mixer.Sound("roblox-gravity-coil-sound-effect-made-with-Voicemod.mp3")
@@ -137,15 +138,26 @@ class Stick_Man:
 
 
 def main():
+
       # turn on pygame
         pygame.init()
 
+        BLACK=(0,0,0)
+        IMAGE_SIZE = 470
+        TEXT_HEIGHT = 30
         # create a screen
-        # TODO: Change the size of the screen as you see fit!
+        # TODO: Change the size of the screen as you see fit
+
         screen_width = 1434
         screen_height = 805
         screen = pygame.display.set_mode((screen_width, screen_height))
         pygame.display.set_caption("Cool Project")
+        tag_image = pygame.image.load("Tag-6-25-2024.png")
+        tag_image = pygame.transform.scale(tag_image,(IMAGE_SIZE, IMAGE_SIZE))
+        font1 = pygame.font.SysFont("comicsansms", 28)
+
+
+        caption1 = font1.render("Ultimate Tag", True, pygame.Color(BLACK))
 
         picture = "unnamed (1).png"
         picture2 = "BLUE IDLE (1).png"
@@ -169,7 +181,6 @@ def main():
         # let's set the framerate
         clock = pygame.time.Clock()
         running= True
-
         while running:
             clock.tick(60)
             hit_sound = pygame.mixer.Sound("hard-slap-46388.mp3")
@@ -185,6 +196,7 @@ def main():
                                 bluescore.stop()
                                 stick_man2.is_it = False
                                 is_player_one_it_next= True
+                                screen.blit(tag_image, (0,0))
                                 cooldown_counter= 90
                                 hit_sound.play()
 
@@ -194,6 +206,7 @@ def main():
                                 redscore.stop()
                                 stick_man1.is_it = False
                                 is_player_one_it_next = False
+                                screen.blit(tag_image, (0, 0))
                                 cooldown_counter = 90
                                 hit_sound.play()
 
@@ -202,6 +215,7 @@ def main():
 
 
             screen.fill((200,200,200))
+
            # print(cooldown_counter)
             if cooldown_counter > 0:
                 cooldown_counter -= 1
@@ -241,7 +255,7 @@ def main():
             countdownscreen.draw()
             pygame.display.update()
 
-
+            clock.tick(60)
 
 
 if __name__ == "__main__":
