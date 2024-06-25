@@ -28,9 +28,22 @@ class Level:
 
 
 
-
 class Stick_Man:
-    def __init__(self, screen: pygame.Surface, x, y, width, height, level, picture, is_it=False):
+    def change_sprite(self, sprite_number, direction):
+        if sprite_number ==0:
+            self.image = self.original_image
+        elif sprite_number ==1:
+            self.image= self.sticky_man2
+            if direction ==-1:
+                self.image=pygame.transform.flip(self.image, True, False)
+
+
+        self.image = pygame.transform.scale(self.image, (self.width, self.height))
+        self.rect = self.image.get_rect(center=self.rect.center)
+
+
+
+    def __init__(self, screen: pygame.Surface, x, y, width, height, level, picture, sticky_man2, is_it=False):
         self.screen = screen
         self.x = x
         self.y = y
@@ -51,6 +64,9 @@ class Stick_Man:
         self.is_it = is_it
         self.normal_speed = 10
         self.it_speed = 15
+        self.sticky_man2 = pygame.image.load(sticky_man2)
+        self.sticky_man2 = pygame.transform.scale(self.sticky_man2, (self.width, self.height))
+        self.direction=1
 
 
 
@@ -59,7 +75,7 @@ class Stick_Man:
             pygame.draw.rect(self.screen, (0,0,0), (self.x, self.y, 100, 100))
         self.screen.blit(self.image, (self.x, self.y, self.width, self.height))
 
-    def move(self, key_right, key_left, key_up):
+    def move(self, key_right, key_left, key_up, key_tag):
         jump_sound = pygame.mixer.Sound("roblox-gravity-coil-sound-effect-made-with-Voicemod.mp3")
         pressed_keys = pygame.key.get_pressed()
 
@@ -73,14 +89,22 @@ class Stick_Man:
             speed = self.it_speed
 
         if pressed_keys[key_right]:
+            self.direction=1
             self.x += speed
             if self.level.collision_check((self.x, self.y, self.width, self.height)):
                 self.x -= speed
 
         if pressed_keys[key_left]:
+            self.direction=-1
             self.x -= speed
             if self.level.collision_check((self.x, self.y, self.width, self.height)):
                 self.x += speed
+        if pressed_keys[key_tag]:
+            self.change_sprite(1, self.direction)
+        else:
+            self.change_sprite(0, self.direction)
+
+
 
         if pressed_keys[key_up] and self.touching_ground and not self.jump_debounce:
             jump_noise = random.randint(1, 30)
@@ -118,10 +142,10 @@ def main():
         pygame.display.set_caption("Cool Project")
 
         picture = "unnamed (1).png"
-        picture2 = "unnamed (1) (1).png"
+        picture2 = "BLUE IDLE (1).png"
         level = Level(screen)
-        stick_man1 = Stick_Man(screen, 100, 400, 50, 100, level, picture, True)
-        stick_man2 = Stick_Man(screen, 300, 200, 50, 100, level, picture2)
+        stick_man1 = Stick_Man(screen, 100, 400, 50, 100, level, picture, 'hit(red) (1).png', True)
+        stick_man2 = Stick_Man(screen, 300, 200, 50, 100, level, picture2, 'hit(blue).png')
 
 
         pygame.mixer.music.load("easy-arcade-hartzmann-main-version-28392-02-32.mp3")
@@ -150,10 +174,11 @@ def main():
 
 
 
-            stick_man1.move(pygame.K_d, pygame.K_a, pygame.K_w)
+            stick_man1.move(pygame.K_d, pygame.K_a, pygame.K_w,pygame.K_x)
             stick_man1.draw()
-            stick_man2.move(pygame.K_RIGHT, pygame.K_LEFT, pygame.K_UP)
+            stick_man2.move(pygame.K_RIGHT, pygame.K_LEFT, pygame.K_UP, pygame.K_SPACE)
             stick_man2.draw()
+
 
 
 
