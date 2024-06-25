@@ -29,7 +29,7 @@ class Level:
 
 
 class Stick_Man:
-    def __init__(self, screen: pygame.Surface, x, y, width, height, level, picture):
+    def __init__(self, screen: pygame.Surface, x, y, width, height, level, picture, is_it=False):
         self.screen = screen
         self.x = x
         self.y = y
@@ -47,10 +47,15 @@ class Stick_Man:
         self.touching_ground = False
         self.jump_debounce = False
         self.level = level
+        self.is_it = is_it
+        self.normal_speed = 10
+        self.it_speed = 15
 
 
 
     def draw(self):
+        if self.is_it:
+            pygame.draw.rect(self.screen, (0,0,0), (self.x, self.y, 100, 100))
         self.screen.blit(self.image, (self.x, self.y, self.width, self.height))
 
     def move(self, key_right, key_left, key_up):
@@ -62,15 +67,19 @@ class Stick_Man:
         if self.x < 0:
             self.x = 1350
 
+        speed = self.normal_speed
+        if self.is_it:
+            speed = self.it_speed
+
         if pressed_keys[key_right]:
-            self.x += 10
+            self.x += speed
             if self.level.collision_check((self.x, self.y, self.width, self.height)):
-                self.x -= 10
+                self.x -= speed
 
         if pressed_keys[key_left]:
-            self.x -= 20
+            self.x -= speed
             if self.level.collision_check((self.x, self.y, self.width, self.height)):
-                self.x += 20
+                self.x += speed
 
         if pressed_keys[key_up] and self.touching_ground and not self.jump_debounce:
             jump_noise = random.randint(1, 30)
@@ -110,7 +119,7 @@ def main():
         picture = "unnamed (1).png"
         picture2 = "unnamed (1) (1).png"
         level = Level(screen)
-        stick_man1 = Stick_Man(screen, 100, 400, 50, 100, level, picture)
+        stick_man1 = Stick_Man(screen, 100, 400, 50, 100, level, picture, True)
         stick_man2 = Stick_Man(screen, 300, 200, 50, 100, level, picture2)
 
 
