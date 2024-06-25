@@ -55,6 +55,7 @@ class Stick_Man:
         self.picture = picture
         self.original_image = pygame.image.load(picture)
         self.image = pygame.transform.scale(self.original_image, (self.width, self.height))
+        self.image2 = pygame.image.load("corndog.jpg")
         self.rect = self.image.get_rect()
         self.rect.topleft = (self.x, self.y)
         self.acceleration_y = 2
@@ -77,7 +78,7 @@ class Stick_Man:
 
     def draw(self):
         if self.is_it:
-            pygame.draw.rect(self.screen, (0,0,0), (self.x, self.y, 50, 100))
+            self.screen.blit(self.image2, (self.x,self.y))
         self.screen.blit(self.image, (self.x, self.y, self.width, self.height))
 
     def move(self, key_right, key_left, key_up, key_tag):
