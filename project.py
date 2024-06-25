@@ -28,7 +28,7 @@ def main():
                 sys.exit()
 
         screen.fill((0, 0, 0))
-        screen.blit(corndog, (600, 100))
+        screen.blit(corndog, (screen.get_width() / 2 - corndog.get_width() / 2, 100))
         screen.blit(caption1, (screen.get_width() /2 - caption1.get_width() /2 , screen.get_height() / 2))
         #print(pygame.font.get_fonts())
 
