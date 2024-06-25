@@ -170,26 +170,30 @@ def main():
 
         while running:
             clock.tick(60)
+            hit_sound = pygame.mixer.Sound("hard-slap-46388.mp3")
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
                 if event.type == pygame.KEYDOWN:
                     pressed_keys = pygame.key.get_pressed()
-                    if pressed_keys[pygame.K_SPACE]:
+                    if pressed_keys[pygame.K_DOWN]:
                         if stick_man2.is_it:
                             if stick_man2.is_touching(stick_man1):
                                 bluescore.stop()
                                 stick_man2.is_it = False
                                 is_player_one_it_next= True
                                 cooldown_counter= 90
-                    if pressed_keys[pygame.K_x]:
+                                hit_sound.play()
+
+                    if pressed_keys[pygame.K_s]:
                         if stick_man1.is_it:
                             if stick_man1.is_touching(stick_man2):
                                 redscore.stop()
                                 stick_man1.is_it = False
                                 is_player_one_it_next = False
                                 cooldown_counter = 90
+                                hit_sound.play()
 
                     if pressed_keys[pygame.K_h]:
                         redscore.stop()
@@ -222,9 +226,9 @@ def main():
 
 
 
-            stick_man1.move(pygame.K_d, pygame.K_a, pygame.K_w,pygame.K_x)
+            stick_man1.move(pygame.K_d, pygame.K_a, pygame.K_w,pygame.K_s)
             stick_man1.draw()
-            stick_man2.move(pygame.K_RIGHT, pygame.K_LEFT, pygame.K_UP, pygame.K_SPACE)
+            stick_man2.move(pygame.K_RIGHT, pygame.K_LEFT, pygame.K_UP, pygame.K_DOWN)
             stick_man2.draw()
             redscore.draw()
             bluescore.draw()
