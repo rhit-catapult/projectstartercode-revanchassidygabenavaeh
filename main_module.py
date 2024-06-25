@@ -63,14 +63,14 @@ class Stick_Man:
             self.x = 1350
 
         if pressed_keys[key_right]:
-            self.x += 5
+            self.x += 20
             if self.level.collision_check((self.x, self.y, self.width, self.height)):
-                self.x -= 5
+                self.x -= 20
 
         if pressed_keys[key_left]:
-            self.x -= 5
+            self.x -= 20
             if self.level.collision_check((self.x, self.y, self.width, self.height)):
-                self.x += 5
+                self.x += 20
 
         if pressed_keys[key_up] and self.touching_ground and not self.jump_debounce:
             jump_noise = random.randint(1, 30)
