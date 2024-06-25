@@ -1,41 +1,55 @@
 import pygame
 import sys
-import random
-import time
-
-
-
+import scoreboard_module
+import  countdown_module
+import main_module
 
 def main():
-    # turn on pygame
     pygame.init()
+    pygame.display.set_caption("Space Invaders")
+    screen = pygame.display.set_mode((1000, 750))
 
-    # create a screen
-    pygame.display.set_caption("Cool Project")
-    # TODO: Change the size of the screen as you see fit!
-    screen = pygame.display.set_mode((1434, 805))
+    pygame.mixer.Sound("sounds/win.wav").play()
 
-    # let's set the framerate
-    pygame.mixer.music.load("easy-arcade-hartzmann-main-version-28392-02-32.mp3")
-    pygame.mixer.music.play(-1)
+    fighter_image = pygame.image.load("images/fighter.png").convert()
+    fighter_image.set_colorkey((255, 255, 255))
+
+    badguy_image = pygame.image.load("images/badguy.png")
+
+    play_button = button_module.TextButton(screen, screen.get_width() / 2, 250, "Click here to play")
+
+    instructions_font = pygame.font.Font("fonts/COMIC.TTF", 24)
+    instruction_caption1 = instructions_font.render("Use the left and right arrows to move", True,
+                                                    pygame.Color("White"))
+    instruction_caption2 = instructions_font.render("and the spacebar to fire.  Good luck!", True, pygame.Color("White"))
+
+
     clock = pygame.time.Clock()
     while True:
+        clock.tick(60)
         for event in pygame.event.get():
+            if event.type == pygame.MOUSEBUTTONUP:
+                if play_button.is_clicked_by(event.pos):
+                    print("You clicked the play button.")
+                    main_module.main_game_loop(screen)
             if event.type == pygame.QUIT:
                 sys.exit()
+        screen.fill((0, 0, 0))
 
-            # TODO: Add you events code
-        # TODO: Fill the screen with whatever background color you like!
-        screen.fill((200, 200, 200))
-        pygame.draw.rect(screen, pygame.Color(0, 0, 0), (100, 505, 300, 20))
-        pygame.draw.rect(screen, pygame.Color(0, 0, 0), (550, 250, 300, 20))
-        pygame.draw.rect(screen, pygame.Color(0, 0, 0), (800, 600, 300, 20))
-        pygame.draw.rect(screen, pygame.Color(0, 0, 0), (1300, 450, 300, 20))
-        pygame.draw.rect(screen, pygame.Color(0, 0, 0), (0, 775, 1500, 30))
-        # TODO: Add your project code
-        print("hi")
+        x = None  # Just a trick so that x exists after the loop.
+        for k in range(5):
+            x = screen.get_width() / 2 + k * 5
+            y = screen.get_height() - 300 + k * 50
+            pygame.draw.line(screen, (0, 255, 0), (x, y), (x, y + 8), 4)
+        screen.blit(fighter_image, (x - fighter_image.get_width() / 2 + 5, screen.get_height() - fighter_image.get_height()))
 
-        # don't forget the update, otherwise nothing will show up!
+        screen.blit(badguy_image, (screen.get_width() / 2 - 100, 100))
+        play_button.draw()
+
+        screen.blit(instruction_caption1, (30, 12))
+        screen.blit(instruction_caption2, (30, 40))
+
         pygame.display.update()
+
 
 main()
