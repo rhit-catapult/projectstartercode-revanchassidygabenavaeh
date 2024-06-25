@@ -63,9 +63,9 @@ class Stick_Man:
             self.x = 1350
 
         if pressed_keys[key_right]:
-            self.x += 20
+            self.x += 10
             if self.level.collision_check((self.x, self.y, self.width, self.height)):
-                self.x -= 20
+                self.x -= 10
 
         if pressed_keys[key_left]:
             self.x -= 20
