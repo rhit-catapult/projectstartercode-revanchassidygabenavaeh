@@ -2,6 +2,7 @@ import pygame
 import sys
 import random
 import scoreboard_module
+import countdown_module
 
 WHITE= (225, 225,225)
 BLACK=(0,0,0)
@@ -26,16 +27,13 @@ class Level:
 
 
 
-
-
-
 class Stick_Man:
     def change_sprite(self, sprite_number, direction):
         if sprite_number ==0:
             self.image = self.original_image
         elif sprite_number ==1:
             self.image= self.sticky_man2
-            if direction ==-1:
+            if direction ==1:
                 self.image=pygame.transform.flip(self.image, True, False)
 
 
@@ -150,13 +148,18 @@ def main():
         picture = "unnamed (1).png"
         picture2 = "BLUE IDLE (1).png"
         level = Level(screen)
-        stick_man1 = Stick_Man(screen, 100, 400, 50, 100, level, picture, 'hit(red) (1).png', False)
-        stick_man2 = Stick_Man(screen, 300, 200, 50, 100, level, picture2, 'hit(blue).png', True)
 
+        is_game_about_to_start = False
+        cooldown_counter = 90
+
+        is_player_one_it_next = random.randint(0,1)== 0
+        stick_man1 = Stick_Man(screen, 100, 400, 50, 100, level, picture, 'hit(red) (1).png', False)
+        stick_man2 = Stick_Man(screen, 300, 200, 50, 100, level, picture2, 'hit(blue).png', False)
+        stick_man1.sticky_man2 = pygame.transform.flip(stick_man1.sticky_man2, True, False)
 
         redscore = scoreboard_module.Scoreboard(screen, 10, pygame.Color("red"))
         bluescore = scoreboard_module.Scoreboard(screen, 1000, pygame.Color("blue"))
-
+        countdownscreen = countdown_module.Countdown(screen)
         pygame.mixer.music.load("easy-arcade-hartzmann-main-version-28392-02-32.mp3")
         pygame.mixer.music.play(-1)
         frame_counter1 = 0
@@ -164,7 +167,9 @@ def main():
         # let's set the framerate
         clock = pygame.time.Clock()
         running= True
+
         while running:
+            clock.tick(60)
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
@@ -172,16 +177,40 @@ def main():
                 if event.type == pygame.KEYDOWN:
                     pressed_keys = pygame.key.get_pressed()
                     if pressed_keys[pygame.K_SPACE]:
-                        redscore.start()
                         if stick_man2.is_it:
                             if stick_man2.is_touching(stick_man1):
-                                print("TAG!")
+                                bluescore.stop()
+                                stick_man2.is_it = False
+                                is_player_one_it_next= True
+                                cooldown_counter= 90
+                    if pressed_keys[pygame.K_x]:
+                        if stick_man1.is_it:
+                            if stick_man1.is_touching(stick_man2):
+                                redscore.stop()
+                                stick_man1.is_it = False
+                                is_player_one_it_next = False
+                                cooldown_counter = 90
 
                     if pressed_keys[pygame.K_h]:
                         redscore.stop()
 
 
             screen.fill((200,200,200))
+           # print(cooldown_counter)
+            if cooldown_counter > 0:
+                cooldown_counter -= 1
+                if cooldown_counter == 0:
+                    countdownscreen.start()
+                    is_game_about_to_start = True
+            if is_game_about_to_start and not countdownscreen.is_timer_running:
+                is_game_about_to_start = False
+                if is_player_one_it_next:
+                    stick_man1.is_it = True
+                    redscore.start()
+                else:
+                    stick_man2.is_it = True
+                    bluescore.start()
+
 
 
 
@@ -203,10 +232,10 @@ def main():
 
 
 
-                # don't forget the update, otherwise nothing will show up!
+            countdownscreen.draw()
             pygame.display.update()
 
-            clock.tick(60)
+
 
 
 if __name__ == "__main__":
