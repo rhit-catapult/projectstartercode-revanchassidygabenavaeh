@@ -11,7 +11,7 @@ class Level:
         self.platform_pos.append((100, 505, 300, 20))
         self.platform_pos.append((550, 250, 300, 20))
         self.platform_pos.append((800, 600, 300, 20))
-        self.platform_pos.append((1300, 450, 300, 20))
+        self.platform_pos.append((1100, 400, 250, 20))
         self.platform_pos.append((0, 775, 1500, 30))
     def draw(self):
         for platform in self.platform_pos:
@@ -22,6 +22,7 @@ class Level:
             if rect.colliderect(platform):
                 return True
         return False
+
 
 
 
@@ -103,7 +104,7 @@ class Stick_Man:
             self.touching_ground = False
             
 
-
+    if
 
 def main():
       # turn on pygame
