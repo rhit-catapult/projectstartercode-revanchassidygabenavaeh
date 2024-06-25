@@ -104,7 +104,7 @@ class Stick_Man:
             self.touching_ground = False
             
 
-    if
+
 
 def main():
       # turn on pygame
