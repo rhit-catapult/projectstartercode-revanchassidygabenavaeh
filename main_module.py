@@ -69,6 +69,11 @@ class Stick_Man:
         self.sticky_man2 = pygame.transform.scale(self.sticky_man2, (self.width, self.height))
         self.direction=1
 
+    def is_touching(self,other_stickman):
+        my_rect = pygame.Rect(self.x, self.y, self.width,self.height)
+        other_rect=pygame.Rect(other_stickman.x, other_stickman.y, other_stickman.width,other_stickman.height)
+        return my_rect.colliderect(other_rect)
+
 
 
     def draw(self):
@@ -145,8 +150,8 @@ def main():
         picture = "unnamed (1).png"
         picture2 = "BLUE IDLE (1).png"
         level = Level(screen)
-        stick_man1 = Stick_Man(screen, 100, 400, 50, 100, level, picture, 'hit(red) (1).png', True)
-        stick_man2 = Stick_Man(screen, 300, 200, 50, 100, level, picture2, 'hit(blue).png')
+        stick_man1 = Stick_Man(screen, 100, 400, 50, 100, level, picture, 'hit(red) (1).png', False)
+        stick_man2 = Stick_Man(screen, 300, 200, 50, 100, level, picture2, 'hit(blue).png', True)
 
 
         redscore = scoreboard_module.Scoreboard(screen, 10, pygame.Color("red"))
@@ -164,6 +169,16 @@ def main():
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
+                if event.type == pygame.KEYDOWN:
+                    pressed_keys = pygame.key.get_pressed()
+                    if pressed_keys[pygame.K_SPACE]:
+                        redscore.start()
+                        if stick_man2.is_it:
+                            if stick_man2.is_touching(stick_man1):
+                                print("TAG!")
+
+                    if pressed_keys[pygame.K_h]:
+                        redscore.stop()
 
 
             screen.fill((200,200,200))
