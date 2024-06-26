@@ -151,39 +151,36 @@ def main():
         screen_width = 1434
         screen_height = 805
         screen = pygame.display.set_mode((screen_width, screen_height))
-        pygame.display.set_caption("Cool Project")
+        pygame.display.set_caption("Ultimate Tag")
         tag_image = pygame.image.load("Tag-6-25-2024.png")
-        tag_image = pygame.transform.scale(tag_image,(IMAGE_SIZE, IMAGE_SIZE))
+        tag_image = pygame.transform.scale(tag_image,(tag_image.get_width()*0.5, tag_image.get_height()*0.5))
         font1 = pygame.font.SysFont("comicsansms", 28)
-
-
         caption1 = font1.render("Ultimate Tag", True, pygame.Color(BLACK))
+
 
         picture = "unnamed (1).png"
         picture2 = "BLUE IDLE (1).png"
         level = Level(screen)
 
         is_game_about_to_start = False
-        cooldown_counter = 90
+        cooldown_counter = 1
+        tag_counter = 0
 
         is_player_one_it_next = random.randint(0,1)== 0
         stick_man1 = Stick_Man(screen, 100, 400, 50, 100, level, picture, 'hit(red) (1).png', False)
         stick_man2 = Stick_Man(screen, 300, 200, 50, 100, level, picture2, 'hit(blue).png', False)
         stick_man1.sticky_man2 = pygame.transform.flip(stick_man1.sticky_man2, True, False)
 
-        redscore = scoreboard_module.Scoreboard(screen, 10, pygame.Color("red"))
-        bluescore = scoreboard_module.Scoreboard(screen, 1000, pygame.Color("blue"))
+        redscore = scoreboard_module.Scoreboard(screen, 150, pygame.Color("red"))
+        bluescore = scoreboard_module.Scoreboard(screen, 1250, pygame.Color("blue"))
         countdownscreen = countdown_module.Countdown(screen)
         pygame.mixer.music.load("easy-arcade-hartzmann-main-version-28392-02-32.mp3")
         pygame.mixer.music.play(-1)
-        frame_counter1 = 0
-        frame_counter2 = 0
-        # let's set the framerate
         clock = pygame.time.Clock()
+        hit_sound = pygame.mixer.Sound("hard-slap-46388.mp3")
         running= True
         while running:
             clock.tick(60)
-            hit_sound = pygame.mixer.Sound("hard-slap-46388.mp3")
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
@@ -196,7 +193,7 @@ def main():
                                 bluescore.stop()
                                 stick_man2.is_it = False
                                 is_player_one_it_next= True
-                                screen.blit(tag_image, (0,0))
+                                tag_counter=30
                                 cooldown_counter= 90
                                 hit_sound.play()
 
@@ -206,15 +203,12 @@ def main():
                                 redscore.stop()
                                 stick_man1.is_it = False
                                 is_player_one_it_next = False
-                                screen.blit(tag_image, (0, 0))
+                                tag_counter=30
                                 cooldown_counter = 90
                                 hit_sound.play()
 
-                    if pressed_keys[pygame.K_h]:
-                        redscore.stop()
-
-
             screen.fill((200,200,200))
+            screen.blit(caption1, (650, 50))
 
            # print(cooldown_counter)
             if cooldown_counter > 0:
@@ -253,9 +247,17 @@ def main():
 
 
             countdownscreen.draw()
+            if tag_counter > 0:
+                tag_counter -= 1
+                s = pygame.Surface((screen.get_width(),screen.get_height()))  # the size of your rect
+                s.set_alpha(200)  # alpha level
+                s.fill((0, 0, 0))  # this fills the entire surface
+                screen.blit(s, (0, 0))
+
+                screen.blit(tag_image, (screen.get_width() / 2 -tag_image.get_width() / 2 , 150))
             pygame.display.update()
 
-            clock.tick(60)
+
 
 
 if __name__ == "__main__":
