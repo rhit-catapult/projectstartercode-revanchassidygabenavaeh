@@ -8,7 +8,7 @@ import game_over_tag
 
 WHITE= (225, 225,225)
 BLACK=(0,0,0)
-print(pygame.font.get_fonts())
+# print(pygame.font.get_fonts())
 class Level:
     def __init__(self,screen: pygame.Surface):
         self.screen = screen

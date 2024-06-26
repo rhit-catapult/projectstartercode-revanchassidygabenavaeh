@@ -68,7 +68,7 @@ def main():
         screen.blit(red_person, (140, 402))
         screen.blit(blue_person, (1000, 402))
         # screen.blit(caption1, (screen.get_width() /2 - caption1.get_width() /2 , screen.get_height() / 2))
-        #print(pygame.font.get_fonts())
+        # print(pygame.font.get_fonts())
         play_button.draw()
 
         pygame.display.update()
