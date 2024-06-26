@@ -224,7 +224,7 @@ def main_game_loop(screen):
 
             screen.fill((200,200,200))
             screen.blit(caption1, (650, 50))
-            lose_time = 25
+            lose_time = 45
 
             if redscore.get_display_time() > lose_time:
                 game_over_tag.run_game_over_loop(screen, False)
