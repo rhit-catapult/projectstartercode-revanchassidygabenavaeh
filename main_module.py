@@ -134,13 +134,21 @@ class Stick_Man:
         else:
             self.touching_ground = False
             
-
-
-
 def main():
+    pygame.init()
+
+    pygame.display.set_caption("TAG")
+    screen_width = 1434
+    screen_height = 805
+    screen = pygame.display.set_mode((screen_width, screen_height))
+    main_game_loop(screen)
+
+
+
+def main_game_loop(screen):
 
       # turn on pygame
-        pygame.init()
+
 
         BLACK=(0,0,0)
         IMAGE_SIZE = 470
@@ -148,10 +156,9 @@ def main():
         # create a screen
         # TODO: Change the size of the screen as you see fit
 
-        screen_width = 1434
-        screen_height = 805
-        screen = pygame.display.set_mode((screen_width, screen_height))
-        pygame.display.set_caption("Ultimate Tag")
+
+
+
         tag_image = pygame.image.load("Tag-6-25-2024.png")
         tag_image = pygame.transform.scale(tag_image,(tag_image.get_width()*0.5, tag_image.get_height()*0.5))
         font1 = pygame.font.SysFont("comicsansms", 28)
@@ -177,8 +184,12 @@ def main():
         pygame.mixer.music.load("easy-arcade-hartzmann-main-version-28392-02-32.mp3")
         pygame.mixer.music.play(-1)
         clock = pygame.time.Clock()
+
         hit_sound = pygame.mixer.Sound("hard-slap-46388.mp3")
         running= True
+
+
+
         while running:
             clock.tick(60)
             for event in pygame.event.get():

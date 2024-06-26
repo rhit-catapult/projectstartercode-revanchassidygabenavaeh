@@ -46,7 +46,13 @@ def main():
     while True:
         clock.tick(60)
         for event in pygame.event.get():
+            if event.type == pygame.MOUSEBUTTONUP:
+                if play_button.is_clicked_by(event.pos):
+
+                    #print("You clicked the play button.")
+                    main_module.main_game_loop(screen)
             if event.type == pygame.QUIT:
+
                 pygame.quit()
                 sys.exit()
         if drop_thing1.Off_Screen():
