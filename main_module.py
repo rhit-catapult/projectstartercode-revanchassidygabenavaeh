@@ -7,6 +7,7 @@ import countdown_module
 
 WHITE= (225, 225,225)
 BLACK=(0,0,0)
+print(pygame.font.get_fonts())
 class Level:
     def __init__(self,screen: pygame.Surface):
         self.screen = screen
@@ -162,6 +163,7 @@ def main_game_loop(screen):
         tag_image = pygame.image.load("Tag-6-25-2024.png")
         tag_image = pygame.transform.scale(tag_image,(tag_image.get_width()*0.5, tag_image.get_height()*0.5))
         font1 = pygame.font.SysFont("comicsansms", 28)
+
         caption1 = font1.render("Ultimate Tag", True, pygame.Color(BLACK))
 
 
