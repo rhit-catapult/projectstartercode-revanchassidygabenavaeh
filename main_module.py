@@ -214,7 +214,7 @@ def main_game_loop(screen):
                                 tag_counter=30
                                 cooldown_counter= 50
                                 hit_sound.play()
-j
+
                     if pressed_keys[pygame.K_LSHIFT]:
                         if stick_man1.is_it:
                             if stick_man1.is_touching(stick_man2):
