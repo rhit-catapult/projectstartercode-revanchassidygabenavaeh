@@ -8,7 +8,7 @@ import game_over_tag
 
 WHITE= (225, 225,225)
 BLACK=(0,0,0)
-# print(pygame.font.get_fonts())
+print(pygame.font.get_fonts())
 class Level:
     def __init__(self,screen: pygame.Surface):
         self.screen = screen
@@ -20,7 +20,7 @@ class Level:
         self.platform_pos.append((0, 775, 1500, 30))
     def draw(self):
         for platform in self.platform_pos:
-            pygame.draw.rect(self.screen, BLACK, platform)
+            pygame.draw.rect(self.screen, "GREY", platform)
     def collision_check(self, rect):
         rect=pygame.Rect(rect)
         for platform in self.platform_pos:
@@ -188,6 +188,10 @@ def main_game_loop(screen):
         pygame.mixer.music.play(-1)
         clock = pygame.time.Clock()
 
+
+        background_image = pygame.image.load("backgroundimage.jpg")
+        background_image = pygame.transform.scale(background_image, (screen.get_width(), screen.get_height()))
+
         hit_sound = pygame.mixer.Sound("hard-slap-46388.mp3")
         running= True
 
@@ -222,7 +226,7 @@ def main_game_loop(screen):
                                 hit_sound.play()
 
 
-            screen.fill((200,200,200))
+            screen.blit(background_image, (0, 0))
             screen.blit(caption1, (650, 50))
             lose_time = 25
 
