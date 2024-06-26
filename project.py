@@ -3,7 +3,7 @@ import sys
 import main_module
 import time
 import math
-
+import button_start
 class Drop_Things:
     def __init__(self, screen: pygame.surface, y, x):
         self.screen = screen
@@ -14,7 +14,7 @@ class Drop_Things:
 
 
     def draw(self):
-        pygame.draw.line(self.screen, self.color, (self.x, self.y), (self.x + 1, self.y + 5), 2)
+        pygame.draw.line(self.screen, self.color, (self.x, self.y), (self.x + 1, self.y + 500), 50)
 
     def move(self):
         self.y += self.speed_y
@@ -35,7 +35,9 @@ def main():
     # create a screen
     # TODO: Change the size of the screen as you see fit!
 
-    drop_thing1 = Drop_Things(screen, -10, 5)
+    drop_thing1 = Drop_Things(screen, -600, 60)
+    drop_thing2 = Drop_Things(screen, -600, 1374)
+    play_button = button_start.TextButton(screen, screen.get_width() / 2, 600, "             play             ")
     clock = pygame.time.Clock()
     pygame.display.set_caption("TAG")
     while True:
@@ -45,13 +47,18 @@ def main():
                 pygame.quit()
                 sys.exit()
         if drop_thing1.Off_Screen():
-            drop_thing1.y = -10
+            drop_thing1.y = -600
+            drop_thing2.y = -600
         screen.fill((0, 0, 0))
         drop_thing1.move()
         drop_thing1.draw()
+        drop_thing2.move()
+        drop_thing2.draw()
+
         screen.blit(corndog, (screen.get_width() / 2 - corndog.get_width() / 2, 100))
         screen.blit(caption1, (screen.get_width() /2 - caption1.get_width() /2 , screen.get_height() / 2))
         #print(pygame.font.get_fonts())
+        play_button.draw()
 
         pygame.display.update()
 
