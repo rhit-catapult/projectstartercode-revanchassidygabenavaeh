@@ -6,15 +6,19 @@ WHITE = (225, 225, 225)
 BLACK = (0, 0, 0)
 
 class Scoreboard:
-    def __init__(self, screen: pygame.Surface, x, color):
+    def __init__(self, screen: pygame.Surface, is_left_side, color):
         self.screen = screen
-        self.x = x
         self.y = 10
         self.score = 0
         self.color = color
-        self.font = pygame.font.SysFont("candara",30, True)
+        self.font = pygame.font.SysFont("Calibri",30, True)
         self.is_timer_running = False
         self.start_time = 0
+        if is_left_side:
+            self.x = 50
+        else:
+            caption = self.font.render("It timer: 99.99", True, self.color)
+            self.x = screen.get_width() - 50 - caption.get_width()
 
     def get_display_time(self):
         display_time = self.score

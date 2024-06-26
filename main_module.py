@@ -146,7 +146,21 @@ def main():
     screen = pygame.display.set_mode((screen_width, screen_height))
     main_game_loop(screen)
 
-
+def get_random_backgrounds(screen):
+    a = random.randint(1, 6)
+    if a == 1:
+        image_thing = pygame.image.load("corndog.jpg")
+    if a == 2:
+        image_thing = pygame.image.load("day_image.png")
+    if a == 3:
+        image_thing = pygame.image.load("sunset_image.png")
+    if a == 4:
+        image_thing = pygame.image.load("night_image.jpg")
+    if a == 5:
+        image_thing = pygame.image.load("city scape.png")
+    if a == 6:
+        image_thing = pygame.image.load("mario.jpg")
+    return pygame.transform.scale(image_thing, (screen.get_width(), screen.get_height()))
 
 def main_game_loop(screen):
 
@@ -164,7 +178,7 @@ def main_game_loop(screen):
 
         tag_image = pygame.image.load("Tag-6-25-2024.png")
         tag_image = pygame.transform.scale(tag_image,(tag_image.get_width()*0.5, tag_image.get_height()*0.5))
-        font1 = pygame.font.SysFont("comicsansms", 28)
+        font1 = pygame.font.SysFont("elephant", 28)
 
         caption1 = font1.render("Stickyman: Ultimate Tag", True, pygame.Color(BLACK))
 
@@ -182,22 +196,15 @@ def main_game_loop(screen):
         stick_man2 = Stick_Man(screen, 300, 200, 50, 100, level, picture2, 'hit(blue).png', False)
         stick_man1.sticky_man2 = pygame.transform.flip(stick_man1.sticky_man2, True, False)
 
-        redscore = scoreboard_module.Scoreboard(screen, 75, pygame.Color("red"))
-        bluescore = scoreboard_module.Scoreboard(screen, 1250, pygame.Color("blue"))
+        redscore = scoreboard_module.Scoreboard(screen, True, pygame.Color("red"))
+        bluescore = scoreboard_module.Scoreboard(screen, False, pygame.Color("blue"))
         countdownscreen = countdown_module.Countdown(screen)
         pygame.mixer.music.load("easy-arcade-hartzmann-main-version-28392-02-32.mp3")
         pygame.mixer.music.play(-1)
         clock = pygame.time.Clock()
-        a = random.randint(1, 4)
-        if a == 1:
-            image_thing = pygame.image.load("corndog.jpg")
-        if a == 2:
-            image_thing = pygame.image.load("day_image.png")
-        if a == 3:
-            image_thing = pygame.image.load("sunset_image.png")
-        if a == 4:
-            image_thing = pygame.image.load("night_image.jpg")
-        background_image = pygame.transform.scale(image_thing, (screen.get_width(), screen.get_height()))
+
+
+        background_image = get_random_backgrounds(screen)
 
         hit_sound = pygame.mixer.Sound("hard-slap-46388.mp3")
         running= True
@@ -219,7 +226,7 @@ def main_game_loop(screen):
                                 stick_man2.is_it = False
                                 is_player_one_it_next= True
                                 tag_counter=30
-                                cooldown_counter= 50
+                                cooldown_counter= 30
                                 hit_sound.play()
 
                     if pressed_keys[pygame.K_TAB]:
@@ -229,7 +236,7 @@ def main_game_loop(screen):
                                 stick_man1.is_it = False
                                 is_player_one_it_next = False
                                 tag_counter=30
-                                cooldown_counter = 50
+                                cooldown_counter = 30
                                 hit_sound.play()
 
 
@@ -263,6 +270,7 @@ def main_game_loop(screen):
                     is_game_about_to_start = True
             if is_game_about_to_start and not countdownscreen.is_timer_running:
                 is_game_about_to_start = False
+                background_image = get_random_backgrounds(screen)
                 if is_player_one_it_next:
                     stick_man1.is_it = True
                     redscore.start()

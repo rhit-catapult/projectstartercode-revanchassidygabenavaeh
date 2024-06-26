@@ -29,7 +29,6 @@ class Countdown:
         if display_time <= 0:
             self.is_timer_running = False
 
-
     def start(self):
         self.is_timer_running = True
         self.start_time = time.time()
