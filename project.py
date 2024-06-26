@@ -4,6 +4,23 @@ import main_module
 import time
 import math
 
+class Drop_Things:
+    def __init__(self, screen: pygame.surface, y, x):
+        self.screen = screen
+        self.speed_y = 5
+        self.color = "green"
+        self.y = y
+        self.x = x
+
+
+    def draw(self):
+        pygame.draw.line(self.screen, self.color, (self.x, self.y), (self.x + 1, self.y + 5), 2)
+
+    def move(self):
+        self.y += self.speed_y
+
+    def Off_Screen(self):
+        return self.y > self.screen.get_height()
 
 def main():
     # turn on pygame
@@ -18,16 +35,20 @@ def main():
     # create a screen
     # TODO: Change the size of the screen as you see fit!
 
-
+    drop_thing1 = Drop_Things(screen, -10, 5)
+    clock = pygame.time.Clock()
     pygame.display.set_caption("TAG")
-
     while True:
+        clock.tick(60)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
-
+        if drop_thing1.Off_Screen():
+            drop_thing1.y = -10
         screen.fill((0, 0, 0))
+        drop_thing1.move()
+        drop_thing1.draw()
         screen.blit(corndog, (screen.get_width() / 2 - corndog.get_width() / 2, 100))
         screen.blit(caption1, (screen.get_width() /2 - caption1.get_width() /2 , screen.get_height() / 2))
         #print(pygame.font.get_fonts())
