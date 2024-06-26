@@ -55,8 +55,8 @@ class Stick_Man:
         self.picture = picture
         self.original_image = pygame.image.load(picture)
         self.image = pygame.transform.scale(self.original_image, (self.width, self.height))
-        self.image2 = pygame.image.load("Screenshot 2024-06-25 171539 (1).png")
-        self.image2 = pygame.transform.scale(self.image2, (200,200))
+        font1 = pygame.font.SysFont("comicsansms", 28)
+        self.caption1 = font1.render("IT", True, pygame.Color(0,120,0))
         self.rect = self.image.get_rect()
         self.rect.topleft = (self.x, self.y)
         self.acceleration_y = 2
@@ -79,7 +79,7 @@ class Stick_Man:
 
     def draw(self):
         if self.is_it:
-            self.screen.blit(self.image2, (self.x-60,self.y-50))
+            self.screen.blit(self.caption1, (self.x+10,self.y-35))
         self.screen.blit(self.image, (self.x, self.y,200, 200))
 
     def move(self, key_right, key_left, key_up, key_tag):
@@ -194,7 +194,7 @@ def main():
                                 stick_man2.is_it = False
                                 is_player_one_it_next= True
                                 tag_counter=30
-                                cooldown_counter= 90
+                                cooldown_counter= 50
                                 hit_sound.play()
 
                     if pressed_keys[pygame.K_s]:
@@ -204,7 +204,7 @@ def main():
                                 stick_man1.is_it = False
                                 is_player_one_it_next = False
                                 tag_counter=30
-                                cooldown_counter = 90
+                                cooldown_counter = 50
                                 hit_sound.play()
 
             screen.fill((200,200,200))
