@@ -29,7 +29,7 @@ def run_game_over_loop(screen, did_player1_win):
         for event in pygame.event.get():
             if event.type == pygame.MOUSEBUTTONUP:
                 if replay_button.is_clicked_by(event.pos):
-                    print("You clicked the button.  You will now leave this screen.")
+                    print("you have replayed our game:D")
                     return
             if event.type == pygame.QUIT:
                 sys.exit()
