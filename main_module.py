@@ -8,7 +8,7 @@ import game_over_tag
 
 WHITE= (225, 225,225)
 BLACK=(0,0,0)
-print(pygame.font.get_fonts())
+# print(pygame.font.get_fonts())
 class Level:
     def __init__(self,screen: pygame.Surface):
         self.screen = screen
@@ -187,10 +187,16 @@ def main_game_loop(screen):
         pygame.mixer.music.load("easy-arcade-hartzmann-main-version-28392-02-32.mp3")
         pygame.mixer.music.play(-1)
         clock = pygame.time.Clock()
-
-
-        background_image = pygame.image.load("backgroundimage.jpg")
-        background_image = pygame.transform.scale(background_image, (screen.get_width(), screen.get_height()))
+        a = random.randint(1, 4)
+        if a == 1:
+            image_thing = pygame.image.load("backgroundimage.jpg")
+        if a == 2:
+            image_thing = pygame.image.load("day_image.png")
+        if a == 3:
+            image_thing = pygame.image.load("sunset_image.png")
+        if a == 4:
+            image_thing = pygame.image.load("night_image.jpg")
+        background_image = pygame.transform.scale(image_thing, (screen.get_width(), screen.get_height()))
 
         hit_sound = pygame.mixer.Sound("hard-slap-46388.mp3")
         running= True
