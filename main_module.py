@@ -165,7 +165,7 @@ def main_game_loop(screen):
         tag_image = pygame.transform.scale(tag_image,(tag_image.get_width()*0.5, tag_image.get_height()*0.5))
         font1 = pygame.font.SysFont("comicsansms", 28)
 
-        caption1 = font1.render("Ultimate Tag", True, pygame.Color(BLACK))
+        caption1 = font1.render("Stickyman: Ultimate Tag", True, pygame.Color(BLACK))
 
 
         picture = "unnamed (1).png"
