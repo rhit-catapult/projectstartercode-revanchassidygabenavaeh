@@ -215,7 +215,7 @@ def main_game_loop(screen):
                                 cooldown_counter= 50
                                 hit_sound.play()
 
-                    if pressed_keys[pygame.K_x]:
+                    if pressed_keys[pygame.K_LSHIFT]:
                         if stick_man1.is_it:
                             if stick_man1.is_touching(stick_man2):
                                 redscore.stop()
@@ -228,7 +228,7 @@ def main_game_loop(screen):
 
             screen.blit(background_image, (0, 0))
             screen.blit(caption1, (650, 50))
-            lose_time = 25
+            lose_time = 45
 
             if redscore.get_display_time() > lose_time:
                 game_over_tag.run_game_over_loop(screen, False)
@@ -274,9 +274,9 @@ def main_game_loop(screen):
 
 
 
-            stick_man1.move(pygame.K_d, pygame.K_a, pygame.K_w,pygame.K_s)
+            stick_man1.move(pygame.K_d, pygame.K_a, pygame.K_w,pygame.K_LSHIFT)
             stick_man1.draw()
-            stick_man2.move(pygame.K_RIGHT, pygame.K_LEFT, pygame.K_UP, pygame.K_DOWN)
+            stick_man2.move(pygame.K_RIGHT, pygame.K_LEFT, pygame.K_UP, pygame.K_SPACE)
             stick_man2.draw()
             redscore.draw()
             bluescore.draw()
