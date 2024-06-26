@@ -29,15 +29,18 @@ def main():
     screen_height = 805
     screen = pygame.display.set_mode((screen_width, screen_height))
     corndog = pygame.image.load("corndog.jpg")
+    red_person = pygame.image.load("hit(red) (1).png")
+    blue_person = pygame.image.load("hit(blue).png")
+    tag_thing = pygame.image.load("Tag-6-25-2024.png")
 
     font1 = pygame.font.SysFont("elephant", 100)
-    caption1 = font1.render("TAGGGY", True, pygame.Color("green"))
+    # caption1 = font1.render("TAGGGY", True, pygame.Color("green"))
     # create a screen
     # TODO: Change the size of the screen as you see fit!
 
     drop_thing1 = Drop_Things(screen, -600, 60)
     drop_thing2 = Drop_Things(screen, -600, 1374)
-    play_button = button_start.TextButton(screen, screen.get_width() / 2, 600, "             play             ")
+    play_button = button_start.TextButton(screen, screen.get_width() / 2, 525, "             play             ")
     clock = pygame.time.Clock()
     pygame.display.set_caption("TAG")
     while True:
@@ -55,8 +58,10 @@ def main():
         drop_thing2.move()
         drop_thing2.draw()
 
-        screen.blit(corndog, (screen.get_width() / 2 - corndog.get_width() / 2, 100))
-        screen.blit(caption1, (screen.get_width() /2 - caption1.get_width() /2 , screen.get_height() / 2))
+        screen.blit(tag_thing, (screen.get_width() / 2 - tag_thing.get_width() / 2 + 75, -35))
+        screen.blit(red_person, (140, 402))
+        screen.blit(blue_person, (1000, 402))
+        # screen.blit(caption1, (screen.get_width() /2 - caption1.get_width() /2 , screen.get_height() / 2))
         #print(pygame.font.get_fonts())
         play_button.draw()
 
