@@ -18,9 +18,10 @@ class Level:
         self.platform_pos.append((800, 600, 300, 20))
         self.platform_pos.append((1100, 400, 250, 20))
         self.platform_pos.append((0, 775, 1500, 30))
+
     def draw(self):
         for platform in self.platform_pos:
-            pygame.draw.rect(self.screen, "GREY", platform)
+            pygame.draw.rect(self.screen, pygame.Color(100, 100, 100), platform)
     def collision_check(self, rect):
         rect=pygame.Rect(rect)
         for platform in self.platform_pos:
@@ -273,8 +274,10 @@ def main_game_loop(screen):
 
 
             level.draw()
-
-
+            pygame.draw.rect(screen, pygame.Color("black"), (100, 505, 300, 20), 4)
+            pygame.draw.rect(screen, pygame.Color("black"), (550, 250, 300, 20), 4)
+            pygame.draw.rect(screen, pygame.Color("black"), (800, 600, 300, 20), 4)
+            pygame.draw.rect(screen, pygame.Color("black"), (1100, 400, 250, 20), 4)
             stick_man1.dophysics()
             stick_man2.dophysics()
 
