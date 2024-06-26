@@ -82,7 +82,7 @@ class Stick_Man:
 
     def draw(self):
         if self.is_it:
-            self.screen.blit(self.caption1, (self.x+10,self.y-35))
+            self.screen.blit(self.caption1, (self.x+5,self.y-35))
         self.screen.blit(self.image, (self.x, self.y,200, 200))
 
     def move(self, key_right, key_left, key_up, key_tag):
@@ -190,7 +190,7 @@ def main_game_loop(screen):
         clock = pygame.time.Clock()
         a = random.randint(1, 4)
         if a == 1:
-            image_thing = pygame.image.load("backgroundimage.jpg")
+            image_thing = pygame.image.load("corndog.jpg")
         if a == 2:
             image_thing = pygame.image.load("day_image.png")
         if a == 3:
@@ -234,7 +234,8 @@ def main_game_loop(screen):
 
 
             screen.blit(background_image, (0, 0))
-            screen.blit(caption1, (650, 50))
+            pygame.draw.rect(screen, pygame.Color("grey"), (0, 0, 1450, 50))
+            screen.blit(caption1, (screen.get_width() / 2 - caption1.get_width() / 2, 5))
             lose_time = 45
 
             if redscore.get_display_time() > lose_time:

@@ -12,7 +12,7 @@ class Scoreboard:
         self.y = 10
         self.score = 0
         self.color = color
-        self.font = pygame.font.SysFont("candara",20, True)
+        self.font = pygame.font.SysFont("candara",30, True)
         self.is_timer_running = False
         self.start_time = 0
 
@@ -46,8 +46,8 @@ def main():
     screen = pygame.display.set_mode((screen_width, screen_height))
     pygame.display.set_caption("Cool Project")
     #print(pygame.font.get_fonts())
-    redscore = Scoreboard(screen, 10, pygame.Color("red"))
-    bluescore = Scoreboard(screen,1000, pygame.Color("blue"))
+    redscore = Scoreboard(screen, 0, pygame.Color("red"))
+    bluescore = Scoreboard(screen,1200, pygame.Color("blue"))
     clock = pygame.time.Clock()
     running = True
     while running:
