@@ -3,6 +3,7 @@ import sys
 import random
 import scoreboard_module
 import countdown_module
+import game_over_tag
 # 27
 
 WHITE= (225, 225,225)
@@ -180,7 +181,7 @@ def main_game_loop(screen):
         stick_man2 = Stick_Man(screen, 300, 200, 50, 100, level, picture2, 'hit(blue).png', False)
         stick_man1.sticky_man2 = pygame.transform.flip(stick_man1.sticky_man2, True, False)
 
-        redscore = scoreboard_module.Scoreboard(screen, 150, pygame.Color("red"))
+        redscore = scoreboard_module.Scoreboard(screen, 75, pygame.Color("red"))
         bluescore = scoreboard_module.Scoreboard(screen, 1250, pygame.Color("blue"))
         countdownscreen = countdown_module.Countdown(screen)
         pygame.mixer.music.load("easy-arcade-hartzmann-main-version-28392-02-32.mp3")
@@ -220,8 +221,27 @@ def main_game_loop(screen):
                                 cooldown_counter = 50
                                 hit_sound.play()
 
+
             screen.fill((200,200,200))
             screen.blit(caption1, (650, 50))
+            lose_time = 90
+
+            if redscore.get_display_time() > lose_time:
+                game_over_tag.run_game_over_loop(screen, False)
+            if bluescore.get_display_time() > lose_time:
+                game_over_tag.run_game_over_loop(screen, True)
+            if bluescore.get_display_time() > lose_time or redscore.get_display_time() > lose_time:
+                is_game_about_to_start = False
+                cooldown_counter = 1
+                tag_counter = 0
+                redscore.score = 0
+                bluescore.score = 0
+                redscore.is_timer_running = False
+                bluescore.is_timer_running = False
+                stick_man1.is_it = False
+                stick_man2.is_it = False
+
+
 
            # print(cooldown_counter)
             if cooldown_counter > 0:
@@ -234,6 +254,7 @@ def main_game_loop(screen):
                 if is_player_one_it_next:
                     stick_man1.is_it = True
                     redscore.start()
+
                 else:
                     stick_man2.is_it = True
                     bluescore.start()

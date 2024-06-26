@@ -16,11 +16,15 @@ class Scoreboard:
         self.is_timer_running = False
         self.start_time = 0
 
-    def draw(self):
+    def get_display_time(self):
         display_time = self.score
         if self.is_timer_running:
             display_time += time.time() - self.start_time
-        caption = self.font.render("It timer: {:.2f}".format(display_time), True, self.color)
+        return display_time
+
+    def draw(self):
+
+        caption = self.font.render("It timer: {:.2f}".format(self.get_display_time()), True, self.color)
         self.screen.blit(caption,(self.x , self.y))
 
     def start(self):
