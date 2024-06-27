@@ -229,7 +229,7 @@ def main_game_loop(screen):
                                 cooldown_counter= 30
                                 hit_sound.play()
 
-                    if pressed_keys[pygame.K_TAB]:
+                    if pressed_keys[pygame.K_q]:
                         if stick_man1.is_it:
                             if stick_man1.is_touching(stick_man2):
                                 redscore.stop()
@@ -292,7 +292,7 @@ def main_game_loop(screen):
 
 
 
-            stick_man1.move(pygame.K_d, pygame.K_a, pygame.K_w,pygame.K_TAB)
+            stick_man1.move(pygame.K_d, pygame.K_a, pygame.K_w,pygame.K_q)
             stick_man1.draw()
             stick_man2.move(pygame.K_RIGHT, pygame.K_LEFT, pygame.K_UP, pygame.K_RALT)
             stick_man2.draw()
