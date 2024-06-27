@@ -151,13 +151,13 @@ def get_random_backgrounds(screen):
     if a == 1:
         image_thing = pygame.image.load("corndog.jpg")
     if a == 2:
-        image_thing = pygame.image.load("day_image.png")
+        image_thing = pygame.image.load("day_image.jpg")
     if a == 3:
-        image_thing = pygame.image.load("sunset_image.png")
+        image_thing = pygame.image.load("sunset_image.jpg")
     if a == 4:
         image_thing = pygame.image.load("night_image.jpg")
     if a == 5:
-        image_thing = pygame.image.load("city scape.png")
+        image_thing = pygame.image.load("city scape.jpg")
     if a == 6:
         image_thing = pygame.image.load("mario.jpg")
     return pygame.transform.scale(image_thing, (screen.get_width(), screen.get_height()))
