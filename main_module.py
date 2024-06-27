@@ -72,6 +72,7 @@ class Stick_Man:
         self.sticky_man2 = pygame.image.load(sticky_man2)
         self.sticky_man2 = pygame.transform.scale(self.sticky_man2, (self.width, self.height))
         self.direction=-1
+        self.jump_sound = pygame.mixer.Sound("roblox-gravity-coil-sound-effect-made-with-Voicemod.mp3")
 
     def is_touching(self,other_stickman):
         my_rect = pygame.Rect(self.x, self.y, self.width, self.height)
@@ -86,7 +87,6 @@ class Stick_Man:
         self.screen.blit(self.image, (self.x, self.y,200, 200))
 
     def move(self, key_right, key_left, key_up, key_tag):
-        jump_sound = pygame.mixer.Sound("roblox-gravity-coil-sound-effect-made-with-Voicemod.mp3")
         pressed_keys = pygame.key.get_pressed()
 
         if self.x > 1350:
@@ -119,7 +119,7 @@ class Stick_Man:
         if pressed_keys[key_up] and self.touching_ground and not self.jump_debounce:
             jump_noise = random.randint(1, 10)
             if jump_noise == 3:
-                jump_sound.play()
+                self.jump_sound.play()
             self.speed_y = self.init_velocity
             self.touching_ground = False
             self.jump_debounce = True
@@ -238,7 +238,6 @@ def main_game_loop(screen):
                                 tag_counter=30
                                 cooldown_counter = 30
                                 hit_sound.play()
-
 
             screen.blit(background_image, (0, 0))
             pygame.draw.rect(screen, pygame.Color("grey"), (0, 0, 1450, 50))
