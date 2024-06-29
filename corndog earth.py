@@ -24,7 +24,7 @@ pygame.display.set_caption("Moon Destruction")
 moon_img = pygame.image.load('moon.jpg')  # Replace with your moon image file
 earth_img = pygame.image.load('earth.jpg')  # Replace with your earth image file
 dynamite_img = pygame.image.load('dynamite.jpg')  # Replace with your dynamite image file
-corndog_img = pygame.image.load('corndog.jpg')  # Replace with your corndog image file
+corndog_img = pygame.image.load('../pygamestartercode-rhit-naveR/00-IntroToPython/replit_play_example/corndog.jpg')  # Replace with your corndog image file
 
 # Game fonts
 font = pygame.font.Font(None, 36)

@@ -149,7 +149,8 @@ def main():
 def get_random_backgrounds(screen):
     a = random.randint(1, 6)
     if a == 1:
-        image_thing = pygame.image.load("corndog.jpg")
+        image_thing = pygame.image.load(
+            "../pygamestartercode-rhit-naveR/00-IntroToPython/replit_play_example/corndog.jpg")
     if a == 2:
         image_thing = pygame.image.load("day_image.jpg")
     if a == 3:

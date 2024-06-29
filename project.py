@@ -28,7 +28,7 @@ def main():
     screen_width = 1434
     screen_height = 805
     screen = pygame.display.set_mode((screen_width, screen_height))
-    corndog = pygame.image.load("corndog.jpg")
+    corndog = pygame.image.load("../pygamestartercode-rhit-naveR/00-IntroToPython/replit_play_example/corndog.jpg")
     red_person = pygame.image.load("hit(red) (1).png")
     blue_person = pygame.image.load("hit(blue).png")
     tag_thing = pygame.image.load("Tag-6-25-2024.png")
